@@ -21,6 +21,15 @@ public class ContactController {
     public ContactController(ContactService contactService) {
         this.contactService = contactService;
     }
+
+    @GetMapping("/all-contact")
+    public ModelAndView showAllContacts(){
+        ModelAndView modelAndView = new ModelAndView("contactList");
+        List<ContactDto> contactDtos = contactService.getAllcontacts();
+        modelAndView.addObject("contactDtos", contactDtos);
+        return modelAndView;
+    }
+
     @GetMapping("/add-contact")
     public ModelAndView displayAddContactForm(){
         ModelAndView modelAndView = new ModelAndView("addContactForm");
