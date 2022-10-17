@@ -10,7 +10,7 @@ public class Relation {
     private long id;
     @Basic
     @Column(name = "relation")
-    private Object relation;
+    private String relation;
     @ManyToOne
     @JoinColumn(name = "id_contact_1", referencedColumnName = "id", nullable = false)
     private Contact Contact1;
@@ -18,11 +18,20 @@ public class Relation {
     @JoinColumn(name = "id_contact_2", referencedColumnName = "id", nullable = false)
     private Contact Contact2;
 
+    public Relation() {
+    }
+
+    public Relation(String relation, Contact contact1, Contact contact2) {
+        this.relation = relation;
+        Contact1 = contact1;
+        Contact2 = contact2;
+    }
+
     public Object getRelation() {
         return relation;
     }
 
-    public void setRelation(Object relation) {
+    public void setRelation(String relation) {
         this.relation = relation;
     }
 
