@@ -4,6 +4,7 @@ import com.example.phonebook.controller.dto.ContactDto;
 import com.example.phonebook.service.ContactService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -22,11 +23,19 @@ public class ContactController {
         this.contactService = contactService;
     }
 
-    @GetMapping("/all-contact")
+    @GetMapping("/all-contacts")
     public ModelAndView showAllContacts(){
         ModelAndView modelAndView = new ModelAndView("contactList");
         List<ContactDto> contactDtos = contactService.getAllcontacts();
         modelAndView.addObject("contactDtos", contactDtos);
+        return modelAndView;
+    }
+
+    @GetMapping("/details/{id}")
+    public ModelAndView showDetails(@PathVariable Long id){
+        ModelAndView modelAndView = new ModelAndView("contactDetails");
+        ContactDto contactDto = contactService.findContactById(id);
+        modelAndView.addObject("contactDto", contactDto);
         return modelAndView;
     }
 

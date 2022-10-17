@@ -2,7 +2,6 @@ package com.example.phonebook.controller.dto;
 
 import com.example.phonebook.repository.entity.Contact;
 
-import java.sql.Date;
 
 public class ContactDto {
     private Long id;
@@ -12,7 +11,6 @@ public class ContactDto {
     private String function;
     private String email;
     private String telephone;
-    private Date birthDate;
     private String country;
     private String adress1;
     private String adress2;
@@ -65,10 +63,6 @@ public class ContactDto {
         return telephone;
     }
 
-    public Date getBirthDate() {
-        return birthDate;
-    }
-
     public String getCountry() {
         return country;
     }
@@ -113,9 +107,6 @@ public class ContactDto {
         this.telephone = telephone;
     }
 
-    public void setBirthDate(Date birthDate) {
-        this.birthDate = birthDate;
-    }
 
     public void setCountry(String country) {
         this.country = country;
@@ -160,4 +151,5 @@ public class ContactDto {
     public void setId(Long id) {
         this.id = id;
     }
+
 }
