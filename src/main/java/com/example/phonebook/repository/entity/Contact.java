@@ -1,5 +1,7 @@
 package com.example.phonebook.repository.entity;
 
+import com.example.phonebook.controller.dto.ContactDto;
+
 import javax.persistence.*;
 import java.sql.Date;
 import java.util.List;
@@ -20,7 +22,7 @@ public class Contact {
     @Column(name = "company")
     private String company;
     @Basic
-    @Column(name = "function")
+    @Column(name = "job_function")
     private String function;
     @Basic
     @Column(name = "email")
@@ -28,9 +30,6 @@ public class Contact {
     @Basic
     @Column(name = "telephone")
     private String telephone;
-    @Basic
-    @Column(name = "birth_date")
-    private Date birthDate;
     @Basic
     @Column(name = "country")
     private String country;
@@ -46,10 +45,27 @@ public class Contact {
     @Basic
     @Column(name = "town")
     private String town;
-    @OneToMany(mappedBy = "Contact1")
+    @OneToMany(mappedBy = "Contact1", cascade = CascadeType.PERSIST)
     private List<Relation> myRelationWithOthers;
     @OneToMany(mappedBy = "Contact2")
     private List<Relation> othersRelationWithMe;
+
+    public Contact() {
+    }
+
+    public Contact(ContactDto contactDto){
+        this.firstName = contactDto.getFirstName();
+        this.lastName = contactDto.getLastName();
+        this.company = contactDto.getCompany();
+        this.function = contactDto.getFunction();
+        this.email = contactDto.getEmail();
+        this.telephone = contactDto.getTelephone();
+        this.country = contactDto.getCountry();
+        this.adress1 = contactDto.getAdress1();
+        this.adress2 = contactDto.getAdress2();
+        this.postalCode = contactDto.getPostalCode();
+        this.town = contactDto.getTown();
+    }
 
     public long getId() {
         return id;
@@ -107,14 +123,6 @@ public class Contact {
         this.telephone = telephone;
     }
 
-    public Date getBirthDate() {
-        return birthDate;
-    }
-
-    public void setBirthDate(Date birthDate) {
-        this.birthDate = birthDate;
-    }
-
     public String getCountry() {
         return country;
     }
@@ -170,4 +178,5 @@ public class Contact {
     public void setOthersRelationsWithMe(List<Relation> othersRelationWithMe) {
         this.othersRelationWithMe = othersRelationWithMe;
     }
+
 }
