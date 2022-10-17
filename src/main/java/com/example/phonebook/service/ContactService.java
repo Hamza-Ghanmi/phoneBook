@@ -1,6 +1,7 @@
 package com.example.phonebook.service;
 
 import com.example.phonebook.controller.dto.ContactDto;
+import com.example.phonebook.exceptions.ContactNotFoundException;
 import com.example.phonebook.repository.ContactRepository;
 import com.example.phonebook.repository.RelationRepository;
 import com.example.phonebook.repository.entity.Contact;
@@ -41,5 +42,11 @@ public class ContactService {
             contactDtos.add(contactDto);
         });
         return contactDtos;
+    }
+
+    public ContactDto findContactById(Long id) throws ContactNotFoundException {
+        Contact contact = contactRepository.findById(id).orElseThrow(() -> new ContactNotFoundException(id));
+        ContactDto contactDto = new ContactDto(contact);
+        return contactDto;
     }
 }

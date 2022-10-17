@@ -23,7 +23,7 @@
             <div class="collapse navbar-collapse" id="mynavbar">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item" style="margin-top:-12px;">
-                        <a class="nav-link" href="${pageContext.request.contextPath}/contacts/all">All contacts</a>
+                        <a class="nav-link" href="${pageContext.request.contextPath}/contacts/all-contacts">All contacts</a>
                     </li>
                     <li class="nav-item" style="margin-top:-12px;">
                         <a class="nav-link" href="${pageContext.request.contextPath}/contacts/add-contact">Add Contact</a>
