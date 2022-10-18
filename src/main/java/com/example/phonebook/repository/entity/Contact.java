@@ -49,6 +49,9 @@ public class Contact {
     private List<Relation> myRelationWithOthers;
     @OneToMany(mappedBy = "Contact2", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     private List<Relation> othersRelationWithMe;
+    @ManyToOne
+    @JoinColumn(name = "id_user", referencedColumnName = "id")
+    private User userByIdUser;
 
     public Contact() {
     }
@@ -179,4 +182,11 @@ public class Contact {
         this.othersRelationWithMe = othersRelationWithMe;
     }
 
+    public User getUserByIdUser() {
+        return userByIdUser;
+    }
+
+    public void setUserByIdUser(User userByIdUser) {
+        this.userByIdUser = userByIdUser;
+    }
 }
