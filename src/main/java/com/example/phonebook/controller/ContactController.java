@@ -3,10 +3,7 @@ package com.example.phonebook.controller;
 import com.example.phonebook.controller.dto.ContactDto;
 import com.example.phonebook.service.ContactService;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.HashMap;
@@ -56,6 +53,32 @@ public class ContactController {
     public String addContact(ContactDto contactDto){
         contactService.addContact(contactDto);
         return "addContactForm";
+    }
+
+    @GetMapping("/edit-contact/{id}")
+    public ModelAndView displayEditContactForm(@PathVariable Long id){
+        ModelAndView modelAndView = new ModelAndView("editContactForm");
+        ContactDto contactDto = contactService.findContactById(id);
+        modelAndView.addObject("contactDto", contactDto);
+        Map<Long, String> contacts = new HashMap<>();
+        List<ContactDto> contactDtos = contactService.getAllcontacts();
+        contactDtos.forEach(contact -> {
+            contacts.put(contact.getId(), contact.getFirstName() + " " + contact.getLastName());
+        });
+        modelAndView.addObject("contacts", contacts);
+        return modelAndView;
+    }
+
+    @PostMapping("/edit-contact")
+    public String editContact(ContactDto contactDto){
+        contactService.editContact(contactDto);
+        return "redirect:/contacts/all-contacts";
+    }
+
+    @PostMapping("/delete-contact")
+    public String deleteContact(String contactId){
+        contactService.deleteContact(Long.parseLong(contactId));
+        return "redirect:/contacts/all-contacts";
     }
 
 }

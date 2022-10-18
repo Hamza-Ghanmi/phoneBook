@@ -1,4 +1,5 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <c:import url="header.jsp">
     <c:param name="title" value="Contact List"></c:param>
@@ -28,11 +29,16 @@
                             <td>
                                 <div class="btn-group btn-group-lg">
                                     <a href="${pageContext.request.contextPath}/contacts/details/${contactDto.id}" class="btn btn-primary">Details</a>
-                                    <a href="${pageContext.request.contextPath}/contacts/edit/${contactDto.id}" class="btn btn-primary">Edit</a>
-                                    <button type="button" class="btn btn-primary">Delete</button>
+                                    <a href="${pageContext.request.contextPath}/contacts/edit-contact/${contactDto.id}" class="btn btn-primary">Edit</a>
+                                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteConfirm${contactDto.id}">
+                                        Delete
+                                    </button>
                                 </div>
                             </td>
                         </tr>
+                        <c:import url="deleteContact.jsp">
+                            <c:param name="contactId" value="${contactDto.id}"></c:param>
+                        </c:import>
                     </c:forEach>
                     </tbody>
                 </table>

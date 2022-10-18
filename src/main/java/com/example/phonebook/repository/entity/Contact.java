@@ -45,9 +45,9 @@ public class Contact {
     @Basic
     @Column(name = "town")
     private String town;
-    @OneToMany(mappedBy = "Contact1", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "Contact1", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     private List<Relation> myRelationWithOthers;
-    @OneToMany(mappedBy = "Contact2")
+    @OneToMany(mappedBy = "Contact2", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     private List<Relation> othersRelationWithMe;
 
     public Contact() {
