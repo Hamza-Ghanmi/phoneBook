@@ -65,4 +65,9 @@ public class ContactService {
         contact.setTown(contactDto.getTown());
         contactRepository.save(contact);
     }
+
+    public void deleteContact(Long id){
+        Contact contact = contactRepository.findById(id).orElseThrow(() -> new ContactNotFoundException(id));
+        contactRepository.delete(contact);
+    }
 }

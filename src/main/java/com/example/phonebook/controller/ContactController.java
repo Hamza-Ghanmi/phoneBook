@@ -3,10 +3,7 @@ package com.example.phonebook.controller;
 import com.example.phonebook.controller.dto.ContactDto;
 import com.example.phonebook.service.ContactService;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.HashMap;
@@ -75,6 +72,12 @@ public class ContactController {
     @PostMapping("/edit-contact")
     public String editContact(ContactDto contactDto){
         contactService.editContact(contactDto);
+        return "redirect:/contacts/all-contacts";
+    }
+
+    @PostMapping("/delete-contact")
+    public String deleteContact(String contactId){
+        contactService.deleteContact(Long.parseLong(contactId));
         return "redirect:/contacts/all-contacts";
     }
 
