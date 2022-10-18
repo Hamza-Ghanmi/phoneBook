@@ -28,7 +28,7 @@
                             <td>
                                 <div class="btn-group btn-group-lg">
                                     <a href="${pageContext.request.contextPath}/contacts/details/${contactDto.id}" class="btn btn-primary">Details</a>
-                                    <a href="${pageContext.request.contextPath}/contacts/edit/${contactDto.id}" class="btn btn-primary">Edit</a>
+                                    <a href="${pageContext.request.contextPath}/contacts/edit-contact/${contactDto.id}" class="btn btn-primary">Edit</a>
                                     <button type="button" class="btn btn-primary">Delete</button>
                                 </div>
                             </td>

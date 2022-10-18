@@ -7,7 +7,6 @@ import com.example.phonebook.repository.RelationRepository;
 import com.example.phonebook.repository.entity.Contact;
 import com.example.phonebook.repository.entity.Relation;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -48,5 +47,22 @@ public class ContactService {
         Contact contact = contactRepository.findById(id).orElseThrow(() -> new ContactNotFoundException(id));
         ContactDto contactDto = new ContactDto(contact);
         return contactDto;
+    }
+
+    public void editContact(ContactDto contactDto) {
+        Long id = contactDto.getId();
+        Contact contact = contactRepository.findById(id).orElseThrow(() -> new ContactNotFoundException(id));
+        contact.setFirstName(contactDto.getFirstName());
+        contact.setLastName(contactDto.getLastName());
+        contact.setCompany(contactDto.getCompany());
+        contact.setFunction(contactDto.getFunction());
+        contact.setEmail(contactDto.getEmail());
+        contact.setTelephone(contactDto.getTelephone());
+        contact.setCountry(contactDto.getCountry());
+        contact.setAdress1(contactDto.getAdress1());
+        contact.setAdress2(contactDto.getAdress2());
+        contact.setPostalCode(contactDto.getPostalCode());
+        contact.setTown(contactDto.getTown());
+        contactRepository.save(contact);
     }
 }

@@ -58,4 +58,24 @@ public class ContactController {
         return "addContactForm";
     }
 
+    @GetMapping("/edit-contact/{id}")
+    public ModelAndView displayEditContactForm(@PathVariable Long id){
+        ModelAndView modelAndView = new ModelAndView("editContactForm");
+        ContactDto contactDto = contactService.findContactById(id);
+        modelAndView.addObject("contactDto", contactDto);
+        Map<Long, String> contacts = new HashMap<>();
+        List<ContactDto> contactDtos = contactService.getAllcontacts();
+        contactDtos.forEach(contact -> {
+            contacts.put(contact.getId(), contact.getFirstName() + " " + contact.getLastName());
+        });
+        modelAndView.addObject("contacts", contacts);
+        return modelAndView;
+    }
+
+    @PostMapping("/edit-contact")
+    public String editContact(ContactDto contactDto){
+        contactService.editContact(contactDto);
+        return "redirect:/contacts/all-contacts";
+    }
+
 }
